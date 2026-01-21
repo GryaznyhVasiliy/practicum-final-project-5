@@ -9,10 +9,10 @@ public abstract class Parcel {
     @Override
     public String toString() {
         return "Parcel{" +
-                "description= " + description + ", " +
-                "weight= " + weight + ", " +
-                "deliveryAddress= " + deliveryAddress + ", " +
-                "sendDay= " + sendDay + "}";
+                "description=" + description + ", " +
+                "weight=" + weight + ", " +
+                "deliveryAddress=" + deliveryAddress + ", " +
+                "sendDay=" + sendDay + "}";
     }
 
     public Parcel(String description, Integer weight, String deliveryAddress, Integer sendDay) {
@@ -31,8 +31,18 @@ public abstract class Parcel {
     }
 
     public Integer calculateDeliveryCost() {
+        if (weight <= 0) {
+            System.out.println("Ошибка. Посылка не имеет веса или он отрицательный.");
+            return null;
+        }
         return weight * getBasicUnitShippingCost();
     }
 
+    public Integer getWeight() {
+        return weight;
+    }
+
     public abstract Integer getBasicUnitShippingCost();
+
+    public abstract ParcelType getParcelType();
 }
